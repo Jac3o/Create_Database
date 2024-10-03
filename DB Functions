@@ -1,0 +1,21 @@
+
+def query_database(database, query): 
+	#Function to run query
+	Lconn = sqlite3.connect(database)
+	cur = Lconn.cursor()			# use a local cursor
+	cur.execute(query)
+	rows = cur.fetchall()
+	cur.close()
+	return rows
+#
+#
+
+#
+def execute_sql(database, sql_statement, parameters=()):
+	#Function to execute the sql statement to INSERT and UPDATE rows
+	with sqlite3.connect(database) as Lconn:
+		cur = Lconn.cursor()
+		cur.execute(sql_statement, parameters)
+		rows = cur.fetchall()
+		conn.commit()
+	return cur.lastrowid
