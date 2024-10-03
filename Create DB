@@ -1,0 +1,44 @@
+
+# creates two tables to store user details such as UserID and user password
+sql = """
+CREATE TABLE "user" (
+	"UserID"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"User_FirstName"	TEXT,
+	"user_password"	TEXT,
+	"user_secondname" TEXT,
+	"user_email" TEXT,
+	"user_username" TEXT
+	);
+CREATE TABLE "review" (
+	"ReviewID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"review_text"  TEXT,
+	"review_stars" INTEGER,
+	"UserID" INTEGER ,
+	FOREIGN KEY(UserID) REFERENCES user(UserID)
+	);
+insert into user (User_FirstName, user_password, user_secondname, user_email, user_username) values ('Kieran', 'password', 'Jackson', 'ksjackson101@gmail.com', 'Jacko');
+insert into user (User_FirstName, user_password, user_secondname, user_email, user_username) values ('Max', 'password', 'Tinsley', 'maxtin101@gmail.com', 'Tincan');
+insert into user (User_FirstName, user_password, user_secondname, user_email, user_username) values ('Brandon', 'password', 'Ferret', 'brandontf@gmail.com', 'Br4nd4n');
+insert into review (review_text, review_stars, UserID) values ('dogshit', 1, 1);
+insert into review (review_text, review_stars, UserID) values ('This was a good system, very easy to understand', 5, 2);
+"""
+
+# global database name
+#
+database_file = 'customer.db'
+# Delete the database
+# in case it already exists
+#
+if os.path.exists(database_file):
+  os.remove(database_file)
+#
+# Connect to the database
+#
+conn = sqlite3.connect(database_file)
+# Get a cursor pointing to the database
+cursor = conn.cursor()
+# Create the tables
+cursor.executescript(sql)
+# Commit to save everything
+conn.commit()
+# Close the connection to the database
