@@ -1,0 +1,57 @@
+CREATE TABLE "user" (
+    "userID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "usrUsername" TEXT,
+    "usrEmail" TEXT,
+    "usrPassword" TEXT,
+    "usrFirstName" TEXT,
+    "usrLastname" TEXT,
+    "usrPhoneNumber" TEXT,
+    "usrDOB" TEXT,
+    "usrIsStaff" BOOLEAN,
+    "usrPoints" TEXT,
+    "usrCreated" DATETIME
+);
+
+CREATE TABLE "orders" (
+    "orderID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "order_date" DATETIME,
+    "order_requiredBy" DATETIME,
+    "order_details" TEXT,
+    "order_totalcost" REAL,
+    "order_paid" BOOLEAN,
+    "order_ready" BOOLEAN,
+    "order_collected" BOOLEAN,
+    "userID" INTEGER,
+    FOREIGN KEY(userID) REFERENCES user(userID)
+);
+
+
+CREATE TABLE "product" (
+    "productID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "product_category" TEXT,
+    "product_desc" TEXT,
+    "product_size" TEXT,
+    "product_price" REAL
+);
+
+CREATE TABLE "review" (
+    "reviewID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "review_date" DATETIME,
+    "review_desc" TEXT,
+    "review_rating" INTEGER,
+    "productID" INTEGER,
+    FOREIGN KEY(productID) REFERENCES product(productID)
+);
+
+insert into user (usrUsername, usrEmail, usrPassword, usrFirstName, usrLastname, usrPhoneNumber, usrDOB, usrIsStaff, usrPoints, usrCreated) values ('1','1@email.com','4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a','john','doe','07682687257','2010-04-25', 1, 0, '2024-02-07 10:42:32');
+insert into user (usrUsername, usrEmail, usrPassword, usrFirstName, usrLastname, usrPhoneNumber, usrDOB, usrIsStaff, usrPoints, usrCreated) values ('josh','josh@email.com','4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a','josh','aaa','07789257172','205-08-04', 0, 0, '2024-02-07 11:13:12');
+insert into user (usrUsername, usrEmail, usrPassword, usrFirstName, usrLastname, usrPhoneNumber, usrDOB, usrIsStaff, usrPoints, usrCreated) values ('mia','mia@email.com','4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a','mia','johnes','07418471938','2006-02-14', 0, 0, '2024-02-07 10:14:56');
+
+
+
+insert into product (product_category, product_desc, product_size, product_price) values ('Food', '{"Name":"Freshly Brewed Coffee","Description":"Rich, aromatic blend of freshly roasted coffee."}', 'Small', 2.50);
+insert into product (product_category, product_desc, product_size, product_price) values ('Food', '{"Name":"Iced Caramel Macchiato","Description":"Espresso with creamy milk and sweet caramel syrup, served over ice."}', 'Medium', 4.25);
+insert into product (product_category, product_desc, product_size, product_price) values ('Food', '{"Name":"Blueberry Muffin","Description":"Moist muffin bursting with juicy blueberries."}', 'N/A', 2.00);
+insert into product (product_category, product_desc, product_size, product_price) values ('Food', '{"Name":"Turkey and Swiss Panini","Description":"Sliced turkey breast and Swiss cheese on artisan bread."}', 'N/A', 6.50);
+insert into product (product_category, product_desc, product_size, product_price) values ('Food', '{"Name":"Chocolate Chunk Cookie","Description":"Soft and chewy cookie with chocolate chunks."}', 'N/A', 1.75);
+"""
