@@ -1,0 +1,59 @@
+import sqlite3
+import os
+import os.path
+
+
+sql = """
+CREATE TABLE "user" (
+    "userID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "User_Firstname" TEXT,
+    "User_Surname" TEXT,
+    "User_PW" TEXT,
+    "User_UN" TEXT
+);
+
+CREATE TABLE "Appointment" ( 
+    "ApptID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "dateOfbooking" TEXT,
+    "appt_date" TEXT,
+    "appt_duration" INTEGER,
+    "userID" INTEGER,
+    "DR_ID" INTEGER,
+    FOREIGN KEY(userID) REFERENCES user(userID),
+    FOREIGN KEY(DR_ID) REFERENCES Doctor(DR_ID)
+);
+
+
+CREATE TABLE "Doctor" (
+    "DR_ID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "Dr_Firstname" TEXT,
+    "Dr_Lastname" TEXT
+);
+
+insert into user (User_Firstname ,User_Surname, User_PW, User_UN) values ('Kieran', 'Jackson', 'Password', 'Jacko');
+
+insert into Doctor (Dr_Firstname ,Dr_Lastname) values ('Max', 'Tinsley');
+
+insert into Appointment (dateOfbooking ,appt_date, appt_duration, userID, DR_ID) values ('05/03/2025', '10/05/2025', '10', '1', '1');
+
+"""
+
+# global database name
+#
+database_file = 'customer.db'
+# Delete the database
+# in case it already exists
+#
+if os.path.exists(database_file):
+  os.remove(database_file)
+#
+# Connect to the database
+#
+conn = sqlite3.connect(database_file)
+# Get a cursor pointing to the database
+cursor = conn.cursor()
+# Create the tables
+cursor.executescript(sql)
+# Commit to save everything
+conn.commit()
+# Close the connection to the database
