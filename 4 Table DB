@@ -1,3 +1,4 @@
+sql = """
 CREATE TABLE "user" (
     "userID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "usrUsername" TEXT,
