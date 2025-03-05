@@ -1,4 +1,4 @@
-
+import sqlite3
 # creates two tables to store user details such as UserID and user password
 sql = """
 CREATE TABLE "user" (
