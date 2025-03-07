@@ -1,0 +1,38 @@
+import matplotlib.pyplot as plt
+from guizero import App, Window, PushButton, Text, CheckBox, ListBox, TextBox, ButtonGroup, Picture, Combo, Box,info  #window is second form
+from dateutil.relativedelta import *
+from datetime import date
+from datetime import datetime
+############################
+#      CREATE DATABASE     #
+############################
+
+# creates two tables to store user details such as UserID and user password
+sql = """
+CREATE TABLE "user" (
+	"UserID"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"User_FirstName"	TEXT,
+	"User_Surname"	TEXT,
+	"User_Username" TEXT,
+	"User_Password" TEXT,
+	"User_Email" TEXT,
+	"User_Birthday" TEXT,
+	"User_Premium" BOOLEAN
+	);
+CREATE TABLE "tracking" (
+	"TrackingID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"Track_Date"  TEXT	,
+	"Track_NumSteps" INTEGER,
+	"Track_Calories" INTEGER,
+	"UserID" INTEGER ,
+	FOREIGN KEY(UserID) REFERENCES user(UserID)
+	);
+insert into user (User_FirstName, User_Surname, User_Username, User_Password, User_Email, User_Birthday, User_Premium) values ('Kieran', 'Jackson', 'Jacko' ,'Password1', 'ksjackson101@gmail.com', '18/06/2007', 'True');
+insert into user (User_FirstName, User_Surname, User_Username, User_Password, User_Email, User_Birthday, User_Premium) values ('Max', 'Tinsley', 'Tincan' ,'Password1', 'maxtinsley@gmail.com', '20/10/2006', 'True');
+insert into user (User_FirstName, User_Surname, User_Username, User_Password, User_Email, User_Birthday, User_Premium) values ('Brandon', 'Towers-ferett', 'BR4NDON' ,'Password1', 'brandontf@gmail.com', '21/11/2006', 'False');
+insert into user (User_FirstName, User_Surname, User_Username, User_Password, User_Email, User_Birthday, User_Premium) values ('Thomas', 'Petrie', 'Biggesttom' ,'Password1', 'TomP@gmail.com', '04/04/2007', 'False');
+insert into tracking (Track_Date, Track_NumSteps, Track_Calories, UserID) values ('2024/12/12', '5000', '450' ,'1');
+insert into tracking (Track_Date, Track_NumSteps, Track_Calories, UserID) values ('2025/01/23', '6500', '560' ,'1');
+insert into tracking (Track_Date, Track_NumSteps, Track_Calories, UserID) values ('2025/01/23', '6700', '580' ,'3');
+insert into tracking (Track_Date, Track_NumSteps, Track_Calories, UserID) values ('2025/01/29', '2350', '230' ,'4');
+"""
